@@ -88,6 +88,8 @@ main .converter .convert .radio-group {
 }
 main .converter .convert .radio-group label,
 main .converter .convert .radio-group input {
+  display: grid;
+  align-content: center;
   text-align: center;
   width: 65px;
   height: 30px;
