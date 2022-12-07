@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  border: 0 none;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #c6c6c6;
+}
+
+/* Header */
+header {
+  height: 50px;
+  background-color: #f5f5f6;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  margin-bottom: 60px;
+}
+
+header .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+header .navbar .navbar-item {
+  letter-spacing: 0.06em;
+  color: #959ba4;
+}
+
+header .navbar .navbar-item:hover,
+header .navbar .navbar-item.active {
+  color: #000;
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Container */
+main .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+main .title {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 42px;
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+main .converter {
+  display: flex;
+  justify-content: space-between;
+  gap: 123px;
+}
+
+main .converter .convert .subtitle {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #9f9f9f;
+  margin-bottom: 5px;
+}
+main .converter .convert .radio-group {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 20px;
+}
+main .converter .convert .radio-group label,
+main .converter .convert .radio-group input {
+  text-align: center;
+  width: 65px;
+  height: 30px;
+  border: 1px solid #e5e5e5;
+  padding: 0;
+  cursor: pointer;
+}
+main .converter .convert .radio-group input[type="radio"] {
+  display: none;
+}
+main .converter .convert .radio-group label:hover {
+  background: #ddd;
+  color: white;
+}
+
+main .converter .convert .radio-group input[type="radio"]:checked + label {
+  background-color: #833ae0;
+  color: white;
+}
+
+main .converter .convert .input-box {
+  box-sizing: border-box;
+  height: 102px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+main .converter .convert .input-box input {
+  width: 250px;
+  height: 38px;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #000000;
+  padding: 10px;
+}
+main .converter .convert .input-box .info {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #c6c6c6;
+  padding: 10px;
+}
+/* Components */
+.btn {
+  border-radius: 4px;
+  width: 58px;
+  height: 33px;
+  cursor: pointer;
+}
+.btn.btn-primary {
+  background: #ffffff;
+}
