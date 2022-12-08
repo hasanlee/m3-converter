@@ -146,3 +146,23 @@ main .converter .convert .input-box .info {
 .btn.btn-primary {
   background: #ffffff;
 }
+
+footer {
+  margin-top: 50px;
+  display: grid;
+  place-items: center;
+}
+
+.error {
+  /* width: 30%; */
+  background-color: rgb(255, 37, 37);
+  padding: 10px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  color: #ddd;
+  opacity: 0;
+}
+.show {
+  opacity: 1;
+  transition: opacity 1s ease;
+}

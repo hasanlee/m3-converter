@@ -9,6 +9,8 @@ const sellRadios = document.querySelectorAll('input[name="from"]');
 const buyRadios = document.querySelectorAll('input[name="to"]');
 const infoSell = document.querySelector(".info-sell");
 const infoBuy = document.querySelector(".info-buy");
+const error = document.querySelector(".error");
+const errorMsg = document.querySelector(".message");
 const API_URL = "https://api.exchangerate.host/latest";
 let fromSymbol;
 let toSymbol;
@@ -55,6 +57,11 @@ function getRatesFromApi(from, to) {
         toRate = data.rates[toSymbol];
         infoSell.innerHTML = `1 ${fromSymbol} = ${rates[toSymbol]} ${toSymbol}`;
         buy.value = sell.value * rates[toSymbol];
+      })
+      .catch((e) => {
+        error.classList.toggle("show");
+        errorMsg.innerHTML = `<b>Error : </b> ${e}`;
+        return;
       });
     fetch(API_URL + `?base=${toSymbol}&symbols=${fromSymbol}`)
       .then((res) => res.json())
