@@ -11,7 +11,7 @@ const infoSell = document.querySelector(".info-sell");
 const infoBuy = document.querySelector(".info-buy");
 const error = document.querySelector(".error");
 const errorMsg = document.querySelector(".message");
-const API_URL = "https://api.exchangerate.host/latest";
+const API_URL = "https://api.exchangerate.host/latest?places=2";
 let fromSymbol;
 let toSymbol;
 let fromRate = 1;
@@ -50,20 +50,20 @@ function getRatesFromApi(from, to) {
     fromRate = 1;
     infoBuy.innerHTML = `1 ${toSymbol} = 1 ${fromSymbol}`;
   } else {
-    fetch(API_URL + `?base=${fromSymbol}&symbols=${toSymbol}`)
+    fetch(API_URL + `&base=${fromSymbol}&symbols=${toSymbol}`)
       .then((res) => res.json())
       .then((data) => {
         rates = data.rates;
         toRate = data.rates[toSymbol];
         infoSell.innerHTML = `1 ${fromSymbol} = ${rates[toSymbol]} ${toSymbol}`;
-        buy.value = (sell.value * rates[toSymbol]).toFixed(3);
+        buy.value = sell.value * rates[toSymbol];
       })
       .catch((e) => {
         error.classList.toggle("show");
         errorMsg.innerHTML = `<b>Error : </b> ${e}`;
         return;
       });
-    fetch(API_URL + `?base=${toSymbol}&symbols=${fromSymbol}`)
+    fetch(API_URL + `&base=${toSymbol}&symbols=${fromSymbol}`)
       .then((res) => res.json())
       .then((data) => {
         fromRate = data.rates[fromSymbol];
@@ -74,8 +74,8 @@ function getRatesFromApi(from, to) {
 
 function convert(reverseConvert) {
   if (reverseConvert) {
-    sell.value = (parseFloat(buy.value) * fromRate).toFixed(3);
+    sell.value = parseFloat(buy.value) * fromRate;
   } else {
-    buy.value = (parseFloat(sell.value) * toRate).toFixed(3);
+    buy.value = parseFloat(sell.value) * toRate;
   }
 }
