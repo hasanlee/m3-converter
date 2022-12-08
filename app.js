@@ -41,20 +41,28 @@ function getRatesFromApi(from, to) {
   fromSymbol = from;
   toSymbol = to;
 
-  fetch(API_URL + `?base=${fromSymbol}&symbols=${toSymbol}`)
-    .then((res) => res.json())
-    .then((data) => {
-      rates = data.rates;
-      toRate = data.rates[toSymbol];
-      infoSell.innerHTML = `1 ${fromSymbol} = ${rates[toSymbol]} ${toSymbol}`;
-      buy.value = sell.value * rates[toSymbol];
-    });
-  fetch(API_URL + `?base=${toSymbol}&symbols=${fromSymbol}`)
-    .then((res) => res.json())
-    .then((data) => {
-      fromRate = data.rates[fromSymbol];
-      infoBuy.innerHTML = `1 ${toSymbol} = ${data.rates[fromSymbol]} ${fromSymbol}`;
-    });
+  if (fromSymbol === toSymbol) {
+    toRate = 1;
+    infoSell.innerHTML = `1 ${fromSymbol} = 1 ${toSymbol}`;
+    buy.value = sell.value * 1;
+    fromRate = 1;
+    infoBuy.innerHTML = `1 ${toSymbol} = 1 ${fromSymbol}`;
+  } else {
+    fetch(API_URL + `?base=${fromSymbol}&symbols=${toSymbol}`)
+      .then((res) => res.json())
+      .then((data) => {
+        rates = data.rates;
+        toRate = data.rates[toSymbol];
+        infoSell.innerHTML = `1 ${fromSymbol} = ${rates[toSymbol]} ${toSymbol}`;
+        buy.value = sell.value * rates[toSymbol];
+      });
+    fetch(API_URL + `?base=${toSymbol}&symbols=${fromSymbol}`)
+      .then((res) => res.json())
+      .then((data) => {
+        fromRate = data.rates[fromSymbol];
+        infoBuy.innerHTML = `1 ${toSymbol} = ${data.rates[fromSymbol]} ${fromSymbol}`;
+      });
+  }
 }
 
 function convert(reverseConvert) {
