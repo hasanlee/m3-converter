@@ -12,14 +12,20 @@ const infoBuy = document.querySelector(".info-buy");
 const API_URL = "https://api.exchangerate.host/latest";
 let fromSymbol;
 let toSymbol;
+let fromRate = 1;
+let toRate = 1;
 let rates;
 
 document.addEventListener(
   "load",
   getRatesFromApi(sellRadio.value, buyRadio.value)
 );
-sell.addEventListener("keyup", convert);
-buy.addEventListener("keyup", convert);
+sell.addEventListener("keyup", () => {
+  convert(false);
+});
+buy.addEventListener("keyup", () => {
+  convert(true);
+});
 sellRadios.forEach((radio) => {
   radio.addEventListener("change", (e) => {
     getRatesFromApi(e.target.value, toSymbol);
@@ -39,16 +45,22 @@ function getRatesFromApi(from, to) {
     .then((res) => res.json())
     .then((data) => {
       rates = data.rates;
+      toRate = data.rates[toSymbol];
       infoSell.innerHTML = `1 ${fromSymbol} = ${rates[toSymbol]} ${toSymbol}`;
       buy.value = sell.value * rates[toSymbol];
     });
   fetch(API_URL + `?base=${toSymbol}&symbols=${fromSymbol}`)
     .then((res) => res.json())
     .then((data) => {
+      fromRate = data.rates[fromSymbol];
       infoBuy.innerHTML = `1 ${toSymbol} = ${data.rates[fromSymbol]} ${fromSymbol}`;
     });
 }
 
-function convert() {
-  buy.value = parseFloat(sell.value) * rates[toSymbol];
+function convert(reverseConvert) {
+  if (reverseConvert) {
+    sell.value = parseFloat(buy.value) * fromRate;
+  } else {
+    buy.value = parseFloat(sell.value) * toRate;
+  }
 }
