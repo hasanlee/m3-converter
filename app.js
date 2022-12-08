@@ -56,7 +56,7 @@ function getRatesFromApi(from, to) {
         rates = data.rates;
         toRate = data.rates[toSymbol];
         infoSell.innerHTML = `1 ${fromSymbol} = ${rates[toSymbol]} ${toSymbol}`;
-        buy.value = sell.value * rates[toSymbol];
+        buy.value = (sell.value * rates[toSymbol]).toFixed(3);
       })
       .catch((e) => {
         error.classList.toggle("show");
@@ -74,8 +74,8 @@ function getRatesFromApi(from, to) {
 
 function convert(reverseConvert) {
   if (reverseConvert) {
-    sell.value = parseFloat(buy.value) * fromRate;
+    sell.value = (parseFloat(buy.value) * fromRate).toFixed(3);
   } else {
-    buy.value = parseFloat(sell.value) * toRate;
+    buy.value = (parseFloat(sell.value) * toRate).toFixed(3);
   }
 }
